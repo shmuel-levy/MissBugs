@@ -1,0 +1,43 @@
+[
+  {
+    "_id": "xNjIJ5",
+    "description": "",
+    "severity": null,
+    "createdAt": 1742644325026
+  },
+  {
+    "_id": "XLDNYV",
+    "title": "New Bug",
+    "description": "This is a test",
+    "severity": 3,
+    "createdAt": 1742644313715
+  },
+  {
+    "title": "Infinite Loop Detected",
+    "description": "Application freezes in an infinite loop when saving data",
+    "severity": 4,
+    "_id": "1NF1N1T3",
+    "createdAt": 1542107359454
+  },
+  {
+    "title": "Keyboard Not Found",
+    "description": "Error message appears even when keyboard is connected",
+    "severity": 3,
+    "_id": "K3YB0RD",
+    "createdAt": 1542107359454
+  },
+  {
+    "title": "404 Coffee Not Found",
+    "description": "Developer productivity decreased significantly",
+    "severity": 2,
+    "_id": "C0FF33",
+    "createdAt": 1542107359454
+  },
+  {
+    "title": "Unexpected Response",
+    "description": "API returns random data occasionally",
+    "severity": 1,
+    "_id": "G0053",
+    "createdAt": 1542107359454
+  }
+]

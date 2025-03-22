@@ -1,13 +1,9 @@
 import fs from 'fs'
-import { utilService } from './util.service.js'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-const BUGS_FILE = 'data/bug.json'
-
-if (!fs.existsSync('data')) {
-    fs.mkdirSync('data')
-}
-
-_createBugs()
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const BUGS_FILE = path.join(__dirname, '..', 'data', 'bugs.json')
 
 export const bugService = {
     query,
@@ -70,43 +66,6 @@ function getDefaultFilter() {
     return { txt: '', minSeverity: 0 }
 }
 
-function _createBugs() {
-    if (fs.existsSync(BUGS_FILE)) return
-    
-    const bugs = [
-        {
-            title: "Infinite Loop Detected",
-            description: "Application freezes in an infinite loop when saving data",
-            severity: 4,
-            _id: "1NF1N1T3",
-            createdAt: Date.now()
-        },
-        {
-            title: "Keyboard Not Found",
-            description: "Error message appears even when keyboard is connected",
-            severity: 3,
-            _id: "K3YB0RD",
-            createdAt: Date.now()
-        },
-        {
-            title: "404 Coffee Not Found",
-            description: "Developer productivity decreased significantly",
-            severity: 2,
-            _id: "C0FF33",
-            createdAt: Date.now()
-        },
-        {
-            title: "Unexpected Response",
-            description: "API returns random data occasionally",
-            severity: 1,
-            _id: "G0053",
-            createdAt: Date.now()
-        }
-    ]
-    
-    _saveBugsToFile(bugs)
-}
-
 function _loadBugsFromFile() {
     try {
         const data = fs.readFileSync(BUGS_FILE, 'utf8')
@@ -133,3 +92,50 @@ function _makeId(length = 6) {
     }
     return txt
 }
+
+function _createBugs() {
+    try {
+        if (fs.existsSync(BUGS_FILE)) {
+            const data = fs.readFileSync(BUGS_FILE, 'utf8')
+            const bugs = JSON.parse(data)
+            if (bugs && bugs.length > 0) return
+        }
+        
+        const bugs = [
+            {
+                title: "Infinite Loop Detected",
+                description: "Application freezes in an infinite loop when saving data",
+                severity: 4,
+                _id: "1NF1N1T3",
+                createdAt: Date.now()
+            },
+            {
+                title: "Keyboard Not Found",
+                description: "Error message appears even when keyboard is connected",
+                severity: 3,
+                _id: "K3YB0RD",
+                createdAt: Date.now()
+            },
+            {
+                title: "404 Coffee Not Found",
+                description: "Developer productivity decreased significantly",
+                severity: 2,
+                _id: "C0FF33",
+                createdAt: Date.now()
+            },
+            {
+                title: "Unexpected Response",
+                description: "API returns random data occasionally",
+                severity: 1,
+                _id: "G0053",
+                createdAt: Date.now()
+            }
+        ]
+        
+        _saveBugsToFile(bugs)
+    } catch (err) {
+        console.error('Error creating bugs:', err)
+    }
+}
+
+_createBugs()

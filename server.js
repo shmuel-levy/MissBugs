@@ -1,12 +1,15 @@
-import express from 'express' 
+import express from 'express'
+import { bugService } from './services/bug.service.js'
+import { loggerService } from './services/logger.service.js'
 import cookieParser from 'cookie-parser'
-import { bugService } from './services/bug.service.local.js'
 
+const app = express()
 
-const app = express() 
 app.use(express.static('public'))
-app.use(express.json())
 app.use(cookieParser())
+app.use(express.json())
+
+
 app.get('/api/bug', (req, res) => {
     const { txt = '', minSeverity = 0 } = req.query
     const filterBy = { txt, minSeverity: +minSeverity }
@@ -14,10 +17,11 @@ app.get('/api/bug', (req, res) => {
     bugService.query(filterBy)
         .then(bugs => res.send(bugs))
         .catch(err => {
-            console.error('Cannot get bugs', err)
+            loggerService.error('Cannot get bugs', err)
             res.status(500).send('Cannot load bugs')
         })
 })
+
 app.get('/api/bug/save', (req, res) => {
     const bugToSave = {
         _id: req.query._id,
@@ -30,7 +34,7 @@ app.get('/api/bug/save', (req, res) => {
     bugService.save(bugToSave)
         .then(bug => res.send(bug))
         .catch(err => {
-            console.error('Cannot save bug', err)
+            loggerService.error('Cannot save bug', err)
             res.status(500).send('Cannot save bug')
         })
 })
@@ -43,7 +47,7 @@ app.get('/api/bug/:bugId', (req, res) => {
         try {
             visitedBugs = JSON.parse(req.cookies.visitedBugs)
         } catch (err) {
-            console.error('Failed to parse visitedBugs cookie', err)
+            loggerService.error('Failed to parse visitedBugs cookie', err)
         }
     }
     
@@ -51,18 +55,19 @@ app.get('/api/bug/:bugId', (req, res) => {
         return res.status(401).send('Wait for a bit')
     }
     
+ 
     if (!visitedBugs.includes(bugId)) {
         visitedBugs.push(bugId)
     }
-
-    console.log('User visited at the following bugs:', visitedBugs)
+    
+    loggerService.info('User visited at the following bugs:', visitedBugs)
     
     res.cookie('visitedBugs', JSON.stringify(visitedBugs), { maxAge: 7000 })
     
     bugService.getById(bugId)
         .then(bug => res.send(bug))
         .catch(err => {
-            console.error('Cannot get bug', err)
+            loggerService.error('Cannot get bug', err)
             res.status(500).send('Cannot load bug')
         })
 })
@@ -72,7 +77,7 @@ app.get('/api/bug/:bugId/remove', (req, res) => {
     bugService.remove(bugId)
         .then(() => res.send('Bug Removed'))
         .catch(err => {
-            console.error('Cannot remove bug', err)
+            loggerService.error('Cannot remove bug', err)
             res.status(500).send('Cannot remove bug')
         })
 })
@@ -81,8 +86,11 @@ app.get('/', (req, res) => {
     res.send('MissBug API Server is Running')
 })
 
-const port = 3030
-app.listen(port, () => 
-    console.log(`Server ready at port http://127.0.0.1:${port}/`)
+app.get('/api/logs', (req, res) => {
+    res.sendFile(process.cwd() + '/logs/backend.log')
+})
+
+const port = 3031 
+app.listen(port, () =>
+    loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
 )
-console.log('hey:')
