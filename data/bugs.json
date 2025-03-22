@@ -1,5 +1,12 @@
 [
   {
+    "_id": "kbPhBt",
+    "title": "Bug 1742667072900",
+    "description": "",
+    "severity": 3,
+    "createdAt": 1742667075454
+  },
+  {
     "_id": "xNjIJ5",
     "description": "",
     "severity": null,
@@ -15,16 +22,9 @@
   {
     "title": "Infinite Loop Detected",
     "description": "Application freezes in an infinite loop when saving data",
-    "severity": 4,
+    "severity": 1,
     "_id": "1NF1N1T3",
-    "createdAt": 1542107359454
-  },
-  {
-    "title": "Keyboard Not Found",
-    "description": "Error message appears even when keyboard is connected",
-    "severity": 3,
-    "_id": "K3YB0RD",
-    "createdAt": 1542107359454
+    "createdAt": "1542107359454"
   },
   {
     "title": "404 Coffee Not Found",

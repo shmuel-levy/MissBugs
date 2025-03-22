@@ -2,13 +2,16 @@ import express from 'express'
 import { bugService } from './services/bug.service.js'
 import { loggerService } from './services/logger.service.js'
 import cookieParser from 'cookie-parser'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const app = express()
 
 app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.json())
-
 
 app.get('/api/bug', (req, res) => {
     const { txt = '', minSeverity = 0 } = req.query
@@ -55,7 +58,6 @@ app.get('/api/bug/:bugId', (req, res) => {
         return res.status(401).send('Wait for a bit')
     }
     
- 
     if (!visitedBugs.includes(bugId)) {
         visitedBugs.push(bugId)
     }
@@ -82,15 +84,19 @@ app.get('/api/bug/:bugId/remove', (req, res) => {
         })
 })
 
-app.get('/', (req, res) => {
+app.get('/api/status', (req, res) => {
     res.send('MissBug API Server is Running')
 })
 
 app.get('/api/logs', (req, res) => {
-    res.sendFile(process.cwd() + '/logs/backend.log')
+    res.sendFile(path.join(__dirname, 'logs', 'backend.log'))
 })
 
-const port = 3031 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
+
+const port = 3033
 app.listen(port, () =>
     loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
 )

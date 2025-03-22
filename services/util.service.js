@@ -1,56 +1,13 @@
-// services/util.service.js
 import fs from 'fs'
-import http from 'http'
-import https from 'https'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const utilService = {
+    makeId,
     readJsonFile,
-    download,
-    httpGet,
-    makeId
-}
-
-function readJsonFile(path) {
-    const str = fs.readFileSync(path, 'utf8')
-    const json = JSON.parse(str)
-    return json
-}
-
-function download(url, fileName) {
-    return new Promise((resolve, reject) => {
-        const file = fs.createWriteStream(fileName)
-        https.get(url, (content) => {
-            content.pipe(file)
-            file.on('error', reject)
-            file.on('finish', () => {
-                file.close()
-                resolve()
-            })
-        })
-    })
-}
-
-function httpGet(url) {
-    const protocol = url.startsWith('https') ? https : http
-    const options = {
-        method: 'GET'
-    }
-
-    return new Promise((resolve, reject) => {
-        const req = protocol.request(url, options, (res) => {
-            let data = ''
-            res.on('data', (chunk) => {
-                data += chunk
-            })
-            res.on('end', () => {
-                resolve(data)
-            })
-        })
-        req.on('error', (err) => {
-            reject(err)
-        })
-        req.end()
-    })
+    writeJsonFile
 }
 
 function makeId(length = 5) {
@@ -60,4 +17,40 @@ function makeId(length = 5) {
         text += possible.charAt(Math.floor(Math.random() * possible.length))
     }
     return text
+}
+
+function readJsonFile(relativePath) {
+    const fullPath = path.resolve(__dirname, '..', relativePath)
+    
+    try {
+        if (!fs.existsSync(fullPath)) {
+            return null
+        }
+        
+        const str = fs.readFileSync(fullPath, 'utf8')
+        const json = JSON.parse(str)
+        return json
+    } catch (err) {
+        console.error('Error reading JSON file:', err)
+        return null
+    }
+}
+
+function writeJsonFile(relativePath, data) {
+    const fullPath = path.resolve(__dirname, '..', relativePath)
+    
+    try {
+        // Ensure directory exists
+        const dir = path.dirname(fullPath)
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true })
+        }
+        
+        const str = JSON.stringify(data, null, 2)
+        fs.writeFileSync(fullPath, str)
+        return true
+    } catch (err) {
+        console.error('Error writing JSON file:', err)
+        return false
+    }
 }

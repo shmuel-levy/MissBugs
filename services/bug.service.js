@@ -5,16 +5,67 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const BUGS_FILE = path.join(__dirname, '..', 'data', 'bugs.json')
 
+// Initialize bugs data
+let bugs = []
+
+// Create data directory if it doesn't exist
+const dataDir = path.join(__dirname, '..', 'data')
+if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true })
+}
+
+// Check if bugs.json exists, if not create it
+if (!fs.existsSync(BUGS_FILE)) {
+    bugs = [
+        {
+            title: "Infinite Loop Detected",
+            description: "Application freezes in an infinite loop when saving data",
+            severity: 4,
+            _id: "1NF1N1T3",
+            createdAt: 1542107359454
+        },
+        {
+            title: "Keyboard Not Found",
+            description: "Error message appears even when keyboard is connected",
+            severity: 3,
+            _id: "K3YB0RD",
+            createdAt: 1542107359454
+        },
+        {
+            title: "404 Coffee Not Found",
+            description: "Developer productivity decreased significantly",
+            severity: 2,
+            _id: "C0FF33",
+            createdAt: 1542107359454
+        },
+        {
+            title: "Unexpected Response",
+            description: "API returns random data occasionally",
+            severity: 1,
+            _id: "G0053",
+            createdAt: 1542107359454
+        }
+    ]
+    fs.writeFileSync(BUGS_FILE, JSON.stringify(bugs, null, 2))
+} else {
+    // Read existing bugs
+    try {
+        const data = fs.readFileSync(BUGS_FILE, 'utf8')
+        bugs = JSON.parse(data)
+    } catch (err) {
+        console.error('Error reading bugs.json:', err)
+    }
+}
+
 export const bugService = {
     query,
     getById,
-    save,
     remove,
+    save,
     getDefaultFilter
 }
 
 function query(filterBy = { txt: '', minSeverity: 0 }) {
-    const bugs = _loadBugsFromFile()
     let filteredBugs = [...bugs]
     
     if (filterBy.txt) {
@@ -30,24 +81,20 @@ function query(filterBy = { txt: '', minSeverity: 0 }) {
 }
 
 function getById(bugId) {
-    const bugs = _loadBugsFromFile()
     const bug = bugs.find(bug => bug._id === bugId)
     if (!bug) return Promise.reject('Cannot find bug - ' + bugId)
     return Promise.resolve(bug)
 }
 
 function remove(bugId) {
-    const bugs = _loadBugsFromFile()
     const bugIdx = bugs.findIndex(bug => bug._id === bugId)
     if (bugIdx === -1) return Promise.reject('Cannot remove bug - ' + bugId)
     bugs.splice(bugIdx, 1)
-    _saveBugsToFile(bugs)
+    _saveBugsToFile()
     return Promise.resolve()
 }
 
 function save(bug) {
-    const bugs = _loadBugsFromFile()
-    
     if (bug._id) {
         const bugIdx = bugs.findIndex(b => b._id === bug._id)
         if (bugIdx === -1) return Promise.reject('Cannot update bug - ' + bug._id)
@@ -58,7 +105,7 @@ function save(bug) {
         bugs.unshift(bug)
     }
     
-    _saveBugsToFile(bugs)
+    _saveBugsToFile()
     return Promise.resolve(bug)
 }
 
@@ -66,17 +113,7 @@ function getDefaultFilter() {
     return { txt: '', minSeverity: 0 }
 }
 
-function _loadBugsFromFile() {
-    try {
-        const data = fs.readFileSync(BUGS_FILE, 'utf8')
-        return JSON.parse(data)
-    } catch (err) {
-        console.error('Error loading bugs from file:', err)
-        return []
-    }
-}
-
-function _saveBugsToFile(bugs) {
+function _saveBugsToFile() {
     try {
         fs.writeFileSync(BUGS_FILE, JSON.stringify(bugs, null, 2))
     } catch (err) {
@@ -92,50 +129,3 @@ function _makeId(length = 6) {
     }
     return txt
 }
-
-function _createBugs() {
-    try {
-        if (fs.existsSync(BUGS_FILE)) {
-            const data = fs.readFileSync(BUGS_FILE, 'utf8')
-            const bugs = JSON.parse(data)
-            if (bugs && bugs.length > 0) return
-        }
-        
-        const bugs = [
-            {
-                title: "Infinite Loop Detected",
-                description: "Application freezes in an infinite loop when saving data",
-                severity: 4,
-                _id: "1NF1N1T3",
-                createdAt: Date.now()
-            },
-            {
-                title: "Keyboard Not Found",
-                description: "Error message appears even when keyboard is connected",
-                severity: 3,
-                _id: "K3YB0RD",
-                createdAt: Date.now()
-            },
-            {
-                title: "404 Coffee Not Found",
-                description: "Developer productivity decreased significantly",
-                severity: 2,
-                _id: "C0FF33",
-                createdAt: Date.now()
-            },
-            {
-                title: "Unexpected Response",
-                description: "API returns random data occasionally",
-                severity: 1,
-                _id: "G0053",
-                createdAt: Date.now()
-            }
-        ]
-        
-        _saveBugsToFile(bugs)
-    } catch (err) {
-        console.error('Error creating bugs:', err)
-    }
-}
-
-_createBugs()
