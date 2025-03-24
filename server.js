@@ -4,6 +4,8 @@ import { loggerService } from './services/logger.service.js'
 import cookieParser from 'cookie-parser'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import PDFDocument from 'pdfkit'
+import { Table } from 'pdfkit-table'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -96,7 +98,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-const port = 3033
+const port = 3031
 app.listen(port, () =>
     loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
 )
