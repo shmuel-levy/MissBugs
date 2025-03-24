@@ -5,16 +5,13 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const BUGS_FILE = path.join(__dirname, '..', 'data', 'bugs.json')
 
-// Initialize bugs data
 let bugs = []
 
-// Create data directory if it doesn't exist
 const dataDir = path.join(__dirname, '..', 'data')
 if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true })
 }
 
-// Check if bugs.json exists, if not create it
 if (!fs.existsSync(BUGS_FILE)) {
     bugs = [
         {
@@ -48,7 +45,6 @@ if (!fs.existsSync(BUGS_FILE)) {
     ]
     fs.writeFileSync(BUGS_FILE, JSON.stringify(bugs, null, 2))
 } else {
-    // Read existing bugs
     try {
         const data = fs.readFileSync(BUGS_FILE, 'utf8')
         bugs = JSON.parse(data)
