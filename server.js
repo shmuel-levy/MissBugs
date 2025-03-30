@@ -96,7 +96,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-const port = 3033
+const port = 3030
 app.listen(port, () =>
-    loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
+    loggerService.info(`Server listening on port http://localhost:${port}/`)
 )
