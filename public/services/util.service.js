@@ -33,21 +33,13 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive 
 }
 
+
 function loadFromStorage(keyDB) {
-    try {
-        const val = localStorage.getItem(keyDB)
-        return JSON.parse(val)
-    } catch (err) {
-        console.error('Error loading from storage:', err)
-        return null
-    }
+    const val = localStorage.getItem(keyDB)
+    return JSON.parse(val)
 }
 
 function saveToStorage(keyDB, val) {
-    try {
-        const valStr = JSON.stringify(val)
-        localStorage.setItem(keyDB, valStr)
-    } catch (err) {
-        console.error('Error saving to storage:', err)
-    }
+    const valStr = JSON.stringify(val)
+    localStorage.setItem(keyDB, valStr)
 }
