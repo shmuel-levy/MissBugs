@@ -11,11 +11,9 @@ export const bugService = {
 }
 
 const bugs = utilService.readJsonFile('data/bug.json')
-
 function query(queryOptions) {
     const { filterBy, sortBy, pagination } = queryOptions
     var bugsToReturn = [ ...bugs ]
-
     if (filterBy.txt) {
         const regExp = new RegExp(filterBy.txt, 'i')
         bugsToReturn = 
@@ -55,6 +53,7 @@ function query(queryOptions) {
 
 function getById(bugId) {
     const bug = bugs.find(bug => bug._id === bugId)
+    console.log('bug:',bug);
     if (!bug) return Promise.reject('Bug not found!')
     return Promise.resolve(bug)
 }

@@ -1,14 +1,15 @@
 const { useState, useEffect } = React
 const { Link, useParams } = ReactRouterDOM
 
-import { bugService } from '../services/bug.service.js'
+import { lineGap } from 'pdfkit'
+import { bugService } from '../services/bug.service.remote.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 export function BugDetails() {
 
     const [bug, setBug] = useState(null)
     const { bugId } = useParams()
-
+console.log('bug',bug)
     useEffect(() => {
         bugService.getById(bugId)
             .then(bug => setBug(bug))

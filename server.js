@@ -14,7 +14,6 @@ app.use(express.json())
 
 app.get('/api/bug', (req, res) => {
     const queryOptions = parseQueryParams(req.query)
-
 	bugService.query(queryOptions)
 		.then(bugs => {
 			res.send(bugs)

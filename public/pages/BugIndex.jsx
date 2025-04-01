@@ -11,7 +11,6 @@ export function BugIndex() {
     const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
     
     useEffect(loadBugs, [filterBy])
-    
     function loadBugs() {
         bugService.query(filterBy)
             .then(setBugs)

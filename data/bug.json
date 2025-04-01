@@ -1,1 +1,80 @@
-[]
+[
+  {
+    "_id": "0VoGzb",
+    "title": "441גככככ",
+    "description": "",
+    "severity": 1,
+    "createdAt": 1743016016506,
+    "labels": [
+      "frontend",
+      "ui"
+    ]
+  },
+  {
+    "_id": "JUeFH9",
+    "title": "Bug 1743014629217",
+    "description": "",
+    "severity": 0,
+    "createdAt": 1743014631016,
+    "labels": [
+      "need-CR",
+      "backend"
+    ]
+  },
+  {
+    "_id": "KcwQA9",
+    "title": "HEL1313",
+    "description": "",
+    "severity": 2,
+    "createdAt": "1743013231902",
+    "labels": [
+      "critical",
+      "dev-branch"
+    ]
+  },
+  {
+    "_id": "XLDNYV",
+    "title": "New Bug",
+    "description": "This is a test",
+    "severity": 3,
+    "createdAt": 1742644313715,
+    "labels": [
+      "testing"
+    ]
+  },
+  {
+    "title": "Infinite Loop Detected",
+    "description": "Application freezes in an infinite loop when saving data",
+    "severity": 1,
+    "_id": "1NF1N1T3",
+    "createdAt": "1542107359454",
+    "labels": [
+      "critical",
+      "frontend",
+      "bug"
+    ]
+  },
+  {
+    "title": "404 Coffee Not Found",
+    "description": "Developer productivity decreased significantly",
+    "severity": 2,
+    "_id": "C0FF33",
+    "createdAt": "1542107359454",
+    "labels": [
+      "urgent",
+      "dev-branch"
+    ]
+  },
+  {
+    "title": "Unexpected Response",
+    "description": "API returns random data occasionally",
+    "severity": 1,
+    "_id": "G0053",
+    "createdAt": 1542107359454,
+    "labels": [
+      "backend",
+      "need-CR",
+      "dev-branch"
+    ]
+  }
+]
