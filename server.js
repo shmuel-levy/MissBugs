@@ -11,7 +11,6 @@ import { authService } from './services/auth.service.js'
 import { requiredAuth } from './middlewares/requiredAuth.middleWare.js'
 const app = express()
 
-// App Configuration
 app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.json())
@@ -108,7 +107,6 @@ app.put('/api/bug/:bugId', requiredAuth, (req, res) => {
         })
 })
 
-//* ------------------- User API -------------------
 app.get('/api/user', (req, res) => {
     userService.query()
         .then(users => res.send(users))
@@ -142,7 +140,6 @@ app.delete('/api/user/:userId', requiredAuth, (req, res) => {
         })
 })
 
-//* ------------------- Auth API -------------------
 app.post('/api/auth/signup', (req, res) => {
     const credentials = req.body
     
@@ -181,7 +178,6 @@ app.post('/api/auth/logout', (req, res) => {
     res.send('Logged out')
 })
 
-// Fallback route
 app.get('/**', (req, res) => {
     res.sendFile(path.resolve('public/index.html'))
 })

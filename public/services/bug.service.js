@@ -1,80 +1,76 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
-const STORAGE_KEY = 'bugs'
-
-_createBugs()
+const BASE_URL = '/api/bug/'
 
 export const bugService = {
     query,
     getById,
     save,
     remove,
-    getDefaultFilter
+    getDefaultFilter,
+    getLabels
 }
 
-function query(filterBy) {
-    return storageService.query(STORAGE_KEY)
-    .then(bugs => {
-
-        if (filterBy.txt) {
-            const regExp = new RegExp(filterBy.txt, 'i')
-            bugs = bugs.filter(bug => regExp.test(bug.title))
-        }
-
-        if (filterBy.minSeverity) {
-            bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
-        }
-
-        return bugs
-    })
+function query(filterBy = getDefaultFilter()) {
+    const params = new URLSearchParams()
+    
+    if (filterBy.txt) params.append('txt', filterBy.txt)
+    if (filterBy.minSeverity) params.append('minSeverity', filterBy.minSeverity)
+    if (filterBy.userId) params.append('userId', filterBy.userId)
+    
+    if (filterBy.labels && filterBy.labels.length > 0) {
+        filterBy.labels.forEach(label => {
+            params.append('labels', label)
+        })
+    }
+    
+    if (filterBy.sortField) params.append('sortField', filterBy.sortField)
+    if (filterBy.sortDir) params.append('sortDir', filterBy.sortDir)
+    
+    if (filterBy.pageIdx !== undefined) params.append('pageIdx', filterBy.pageIdx)
+    
+    return axios.get(BASE_URL + '?' + params.toString())
+        .then(res => res.data)
 }
 
 function getById(bugId) {
-    return storageService.get(STORAGE_KEY, bugId)
+    return axios.get(BASE_URL + bugId)
+        .then(res => res.data)
 }
 
 function remove(bugId) {
-    return storageService.remove(STORAGE_KEY, bugId)
+    return axios.delete(BASE_URL + bugId)
 }
 
 function save(bug) {
     if (bug._id) {
-        return storageService.put(STORAGE_KEY, bug)
+        return axios.put(BASE_URL + bug._id, bug)
+            .then(res => res.data)
     } else {
-        return storageService.post(STORAGE_KEY, bug)
+        return axios.post(BASE_URL, bug)
+            .then(res => res.data)
     }
 }
 
-function _createBugs() {
-    let bugs = utilService.loadFromStorage(STORAGE_KEY)
-    if (bugs && bugs.length > 0) return 
-
-    bugs = [
-        {
-            title: "Infinite Loop Detected",
-            severity: 4,
-            _id: "1NF1N1T3"
-        },
-        {
-            title: "Keyboard Not Found",
-            severity: 3,
-            _id: "K3YB0RD"
-        },
-        {
-            title: "404 Coffee Not Found",
-            severity: 2,
-            _id: "C0FF33"
-        },
-        {
-            title: "Unexpected Response",
-            severity: 1,
-            _id: "G0053"
-        }
-    ]
-    utilService.saveToStorage(STORAGE_KEY, bugs)
+function getDefaultFilter() {
+    return { 
+        txt: '', 
+        minSeverity: 0,
+        labels: [],
+        sortField: '',
+        sortDir: 1
+    }
 }
 
-function getDefaultFilter() {
-    return { txt: '', minSeverity: 0 }
+function getLabels() {
+    return [
+        'critical',
+        'need-CR',
+        'dev-branch',
+        'frontend',
+        'backend',
+        'hardware',
+        'urgent'
+    ]
 }

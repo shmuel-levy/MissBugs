@@ -1,5 +1,4 @@
 import fs from 'fs'
-
 import { utilService } from './util.service.js'
 import { loggerService } from './logger.service.js'
 
@@ -7,73 +6,106 @@ export const bugService = {
     query,
     getById,
     remove,
-    save
+    save,
+    hasBugs
 }
 
 const bugs = utilService.readJsonFile('data/bug.json')
+
 function query(queryOptions) {
     const { filterBy, sortBy, pagination } = queryOptions
     var bugsToReturn = [ ...bugs ]
+    
     if (filterBy.txt) {
         const regExp = new RegExp(filterBy.txt, 'i')
-        bugsToReturn = 
-            bugsToReturn.filter(bug => regExp.test(bug.title))
+        bugsToReturn = bugsToReturn.filter(bug => regExp.test(bug.title))
     }
-
+    
     if (filterBy.minSeverity) {
-        bugsToReturn = 
-            bugsToReturn.filter(bug => bug.severity >= filterBy.minSeverity)
+        bugsToReturn = bugsToReturn.filter(bug => bug.severity >= filterBy.minSeverity)
     }
-
+    
     if (filterBy.labels && filterBy.labels.length > 0) {
-        bugsToReturn = 
-            bugsToReturn.filter(bug => 
-                filterBy.labels.some(label => bug?.labels?.includes(label)))
+        bugsToReturn = bugsToReturn.filter(bug => 
+            filterBy.labels.some(label => bug?.labels?.includes(label)))
     }
-
+    
+    if (filterBy.userId) {
+        bugsToReturn = bugsToReturn.filter(bug => 
+            bug.creator && bug.creator._id === filterBy.userId)
+    }
+    
     if (sortBy.sortField === 'severity' || sortBy.sortField === 'createdAt') {
         const { sortField } = sortBy
-
         bugsToReturn.sort((bug1, bug2) => 
             (bug1[sortField] - bug2[sortField]) * sortBy.sortDir)
     } else if (sortBy.sortField === 'title') {
         bugsToReturn.sort((bug1, bug2) => 
             (bug1.title.localeCompare(bug2.title)) * sortBy.sortDir)
-    } 
-
+    }
+    
     if (pagination.pageIdx !== undefined) {
         const { pageIdx, pageSize} = pagination
-        
         const startIdx = pageIdx * pageSize
         bugsToReturn = bugsToReturn.slice(startIdx, startIdx + pageSize)
     }
-
+    
     return Promise.resolve(bugsToReturn)
 }
 
 function getById(bugId) {
     const bug = bugs.find(bug => bug._id === bugId)
-    console.log('bug:',bug);
     if (!bug) return Promise.reject('Bug not found!')
     return Promise.resolve(bug)
 }
 
-function remove(bugId) {
+function remove(bugId, loggedinUser) {
     const idx = bugs.findIndex(bug => bug._id === bugId)
+    if (idx === -1) return Promise.reject('Bug not found!')
+    
+    if (loggedinUser && !isAuthorized(bugs[idx], loggedinUser)) {
+        return Promise.reject('Not authorized to delete this bug')
+    }
+    
     bugs.splice(idx, 1)
     return _saveBugsToFile()
 }
 
-function save(bug) {
+function save(bug, loggedinUser) {
     if (bug._id) {
         const idx = bugs.findIndex(currBug => currBug._id === bug._id)
-        bugs[idx] = { ...bugs[idx], ...bug }
+        if (idx === -1) return Promise.reject('Bug not found!')
+        
+        if (loggedinUser && !isAuthorized(bugs[idx], loggedinUser)) {
+            return Promise.reject('Not authorized to update this bug')
+        }
+        
+        const { creator, createdAt } = bugs[idx]
+        bugs[idx] = { 
+            ...bugs[idx], 
+            ...bug,
+            creator,
+            createdAt 
+        }
     } else {
         bug._id = utilService.makeId()
         bug.createdAt = Date.now()
         bugs.unshift(bug)
     }
+    
     return _saveBugsToFile().then(() => bug)
+}
+
+function hasBugs(userId) {
+    const userHasBugs = bugs.some(bug => bug.creator && bug.creator._id === userId)
+    if (userHasBugs) return Promise.reject('Cannot remove user with bugs')
+    return Promise.resolve()
+}
+
+
+function isAuthorized(bug, loggedinUser) {
+    return (loggedinUser.isAdmin) || 
+           (bug.creator && bug.creator._id === loggedinUser._id)
 }
 
 function _saveBugsToFile() {
@@ -89,4 +121,3 @@ function _saveBugsToFile() {
         });
     })
 }
-
