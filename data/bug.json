@@ -1,80 +1,112 @@
 [
   {
-    "_id": "0VoGzb",
-    "title": "441גככככ",
-    "description": "",
-    "severity": 1,
-    "createdAt": 1743016016506,
-    "labels": [
-      "frontend",
-      "ui"
-    ]
+      "title": "Login Button Not Responsive",
+      "severity": 2,
+      "creator": {
+          "_id": "fLtg9",
+          "fullname": "Admin Adminov",
+          "isAdmin": true
+      },
+      "createdAt": 1736703760096,
+      "labels": [
+          "high",
+          "critical",
+          "famous"
+      ],
+      "_id": "bug001",
+      "description": "Clicking the login button does not trigger any action. Affects multiple browsers."
   },
   {
-    "_id": "JUeFH9",
-    "title": "Bug 1743014629217",
-    "description": "",
-    "severity": 0,
-    "createdAt": 1743014631016,
-    "labels": [
-      "need-CR",
-      "backend"
-    ]
+      "title": "Mobile Navigation Menu Overlapping",
+      "severity": 1,
+      "creator": {
+          "_id": "oLRch",
+          "fullname": "Lala Shilo"
+      },
+      "createdAt": 1727443345096,
+      "labels": [
+          "high",
+          "critical"
+      ],
+      "_id": "bug006",
+      "description": "Navigation menu overlaps with content on mobile devices."
   },
   {
-    "_id": "KcwQA9",
-    "title": "HEL1313",
-    "description": "",
-    "severity": 2,
-    "createdAt": "1743013231902",
-    "labels": [
-      "critical",
-      "dev-branch"
-    ]
+      "title": "Password Reset Email Not Sent",
+      "severity": 2,
+      "creator": {
+          "_id": "u101",
+          "fullname": "Puki Ja"
+      },
+      "createdAt": 1724798982096,
+      "labels": [
+          "critical",
+          "famous",
+          "dev-branch"
+      ],
+      "_id": "bug004",
+      "description": "Users are not receiving password reset emails, causing account lockouts."
   },
   {
-    "_id": "XLDNYV",
-    "title": "New Bug",
-    "description": "This is a test",
-    "severity": 3,
-    "createdAt": 1742644313715,
-    "labels": [
-      "testing"
-    ]
+      "title": "Database Connection Timeout",
+      "severity": 3,
+      "creator": {
+          "_id": "fLtg9",
+          "fullname": "Admin Adminov",
+          "isAdmin": true
+      },
+      "createdAt": 1728250712096,
+      "labels": [
+          "high",
+          "dev-branch"
+      ],
+      "_id": "bug002",
+      "description": "Intermittent database connection issues causing failed requests."
   },
   {
-    "title": "Infinite Loop Detected",
-    "description": "Application freezes in an infinite loop when saving data",
-    "severity": 1,
-    "_id": "1NF1N1T3",
-    "createdAt": "1542107359454",
-    "labels": [
-      "critical",
-      "frontend",
-      "bug"
-    ]
+      "title": "Checkout Process Freezes",
+      "severity": 3,
+      "creator": {
+          "_id": "cQMMn",
+          "fullname": "Gigi Gu"
+      },
+      "createdAt": 1708367681096,
+      "labels": [
+          "high",
+          "need-CR"
+      ],
+      "_id": "bug007",
+      "description": "Users unable to complete checkout due to the process freezing at the payment step."
   },
   {
-    "title": "404 Coffee Not Found",
-    "description": "Developer productivity decreased significantly",
-    "severity": 2,
-    "_id": "C0FF33",
-    "createdAt": "1542107359454",
-    "labels": [
-      "urgent",
-      "dev-branch"
-    ]
+      "title": "Authentication Timeout Error",
+      "severity": "4",
+      "creator": {
+          "_id": "IsHQv",
+          "fullname": "Nina Simantov",
+          "isAdmin": false
+      },
+      "_id": "hi3of",
+      "createdAt": 1743682158196,
+      "labels": [
+          "critical",
+          "need-CR"
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, earum sed corrupti voluptatum voluptatem at."
   },
   {
-    "title": "Unexpected Response",
-    "description": "API returns random data occasionally",
-    "severity": 1,
-    "_id": "G0053",
-    "createdAt": 1542107359454,
-    "labels": [
-      "backend",
-      "need-CR",
-      "dev-branch"
-    ]
+      "title": "Profile Image Not Updating",
+      "severity": 5,
+      "creator": {
+          "_id": "u101",
+          "fullname": "Puki Ja"
+      },
+      "createdAt": 1714256438096,
+      "labels": [
+          "critical",
+          "need-CR"
+      ],
+      "_id": "bug003",
+      "description": "Uploading a new profile image does not reflect on the frontend."
   }
 ]

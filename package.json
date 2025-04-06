@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^1.8.3",
     "cookie-parser": "^1.4.7",
+    "crypter": "^0.2.2",
     "express": "^4.21.2",
     "nodemon": "^3.1.9",
     "pdfkit": "^0.16.0",
