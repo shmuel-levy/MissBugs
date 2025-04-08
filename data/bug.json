@@ -1,112 +1,124 @@
 [
   {
-      "title": "Login Button Not Responsive",
-      "severity": 2,
-      "creator": {
-          "_id": "fLtg9",
-          "fullname": "Admin Adminov",
-          "isAdmin": true
-      },
-      "createdAt": 1736703760096,
-      "labels": [
-          "high",
-          "critical",
-          "famous"
-      ],
-      "_id": "bug001",
-      "description": "Clicking the login button does not trigger any action. Affects multiple browsers."
+    "title": "ddd",
+    "severity": 22,
+    "description": "I'm am a description",
+    "creator": {
+      "_id": "fLtg9",
+      "fullname": "Shmuel Levy",
+      "isAdmin": true
+    },
+    "_id": "kpCDl",
+    "createdAt": 1744144553667
   },
   {
-      "title": "Mobile Navigation Menu Overlapping",
-      "severity": 1,
-      "creator": {
-          "_id": "oLRch",
-          "fullname": "Lala Shilo"
-      },
-      "createdAt": 1727443345096,
-      "labels": [
-          "high",
-          "critical"
-      ],
-      "_id": "bug006",
-      "description": "Navigation menu overlaps with content on mobile devices."
+    "title": "Login Button Not Responsive",
+    "severity": 2,
+    "creator": {
+      "_id": "fLtg9",
+      "fullname": "Admin Adminov",
+      "isAdmin": true
+    },
+    "createdAt": 1736703760096,
+    "labels": [
+      "high",
+      "critical",
+      "famous"
+    ],
+    "_id": "bug001",
+    "description": "Clicking the login button does not trigger any action. Affects multiple browsers."
   },
   {
-      "title": "Password Reset Email Not Sent",
-      "severity": 2,
-      "creator": {
-          "_id": "u101",
-          "fullname": "Puki Ja"
-      },
-      "createdAt": 1724798982096,
-      "labels": [
-          "critical",
-          "famous",
-          "dev-branch"
-      ],
-      "_id": "bug004",
-      "description": "Users are not receiving password reset emails, causing account lockouts."
+    "title": "Mobile Navigation Menu Overlapping",
+    "severity": 1,
+    "creator": {
+      "_id": "oLRch",
+      "fullname": "Lala Shilo"
+    },
+    "createdAt": 1727443345096,
+    "labels": [
+      "high",
+      "critical"
+    ],
+    "_id": "bug006",
+    "description": "Navigation menu overlaps with content on mobile devices."
   },
   {
-      "title": "Database Connection Timeout",
-      "severity": 3,
-      "creator": {
-          "_id": "fLtg9",
-          "fullname": "Admin Adminov",
-          "isAdmin": true
-      },
-      "createdAt": 1728250712096,
-      "labels": [
-          "high",
-          "dev-branch"
-      ],
-      "_id": "bug002",
-      "description": "Intermittent database connection issues causing failed requests."
+    "title": "Password Reset Email Not Sent",
+    "severity": 2,
+    "creator": {
+      "_id": "u101",
+      "fullname": "Puki Ja"
+    },
+    "createdAt": 1724798982096,
+    "labels": [
+      "critical",
+      "famous",
+      "dev-branch"
+    ],
+    "_id": "bug004",
+    "description": "Users are not receiving password reset emails, causing account lockouts."
   },
   {
-      "title": "Checkout Process Freezes",
-      "severity": 3,
-      "creator": {
-          "_id": "cQMMn",
-          "fullname": "Gigi Gu"
-      },
-      "createdAt": 1708367681096,
-      "labels": [
-          "high",
-          "need-CR"
-      ],
-      "_id": "bug007",
-      "description": "Users unable to complete checkout due to the process freezing at the payment step."
+    "title": "Database Connection Timeout",
+    "severity": 3,
+    "creator": {
+      "_id": "fLtg9",
+      "fullname": "Admin Adminov",
+      "isAdmin": true
+    },
+    "createdAt": 1728250712096,
+    "labels": [
+      "high",
+      "dev-branch"
+    ],
+    "_id": "bug002",
+    "description": "Intermittent database connection issues causing failed requests."
   },
   {
-      "title": "Authentication Timeout Error",
-      "severity": "4",
-      "creator": {
-          "_id": "IsHQv",
-          "fullname": "Nina Simantov",
-          "isAdmin": false
-      },
-      "_id": "hi3of",
-      "createdAt": 1743682158196,
-      "labels": [
-          "critical",
-          "need-CR"
-      ],
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, earum sed corrupti voluptatum voluptatem at."
+    "title": "Checkout Process Freezes",
+    "severity": 3,
+    "creator": {
+      "_id": "cQMMn",
+      "fullname": "Gigi Gu"
+    },
+    "createdAt": 1708367681096,
+    "labels": [
+      "high",
+      "need-CR"
+    ],
+    "_id": "bug007",
+    "description": "Users unable to complete checkout due to the process freezing at the payment step."
   },
   {
-      "title": "Profile Image Not Updating",
-      "severity": 5,
-      "creator": {
-          "_id": "u101",
-          "fullname": "Puki Ja"
-      },
-      "createdAt": 1714256438096,
-      "labels": [
-          "critical",
-          "need-CR"
-      ],
-      "_id": "bug003",
-      "description": "Uploading a new profile image does not reflect on the frontend."
+    "title": "Authentication Timeout Error",
+    "severity": "4",
+    "creator": {
+      "_id": "IsHQv",
+      "fullname": "Nina Simantov",
+      "isAdmin": false
+    },
+    "_id": "hi3of",
+    "createdAt": 1743682158196,
+    "labels": [
+      "critical",
+      "need-CR"
+    ],
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, earum sed corrupti voluptatum voluptatem at."
+  },
+  {
+    "title": "Profile Image Not Updating",
+    "severity": 5,
+    "creator": {
+      "_id": "u101",
+      "fullname": "Puki Ja"
+    },
+    "createdAt": 1714256438096,
+    "labels": [
+      "critical",
+      "need-CR"
+    ],
+    "_id": "bug003",
+    "description": "Uploading a new profile image does not reflect on the frontend."
   }
 ]
