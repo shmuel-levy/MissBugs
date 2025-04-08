@@ -7,9 +7,11 @@
 .bug-preview .title {
     font-weight: bold;
     font-size: 1.1em;
+    color: var(--primary-green);
 }
 
 .bug-preview span {
     margin-inline-start: .5em;
     font-size: .9em;
+    color: var(--text-light);
 }

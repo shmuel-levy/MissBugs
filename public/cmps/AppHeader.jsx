@@ -18,7 +18,7 @@ export function AppHeader() {
 
     return (
         <React.Fragment>
-            <header className="flex align-center space-between main-layout">
+            <header className="app-header main-layout">
                 <img
                     onClick={() => navigate('/')}
                     className="logo"

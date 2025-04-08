@@ -2,6 +2,7 @@
     position: fixed;
     top: 13px;
     right: 10px;
+    z-index: 1000;
 
     display: flex;
     align-items: center;
@@ -10,19 +11,33 @@
     border-radius: .5em;
     
     font-size: .9em;
-    background-color: #111;
-    color: white;
+    background-color: var(--bg-darker);
+    color: var(--text-light);
+    border: 1px solid var(--primary-green);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
 }
 
 .user-msg button {
     border-radius: 50%;
     line-height: 1.1;
+    background-color: var(--bg-dark);
+    color: var(--primary-green);
+    border: 1px solid var(--primary-green);
+    transition: all 0.3s ease;
+}
+
+.user-msg button:hover {
+    background-color: var(--primary-green);
+    color: var(--bg-dark);
 }
 
 .success {
-    background-color: var(--success);
+    background-color: color-mix(in srgb, var(--primary-green) 20%, var(--bg-darker));
+    border-color: var(--primary-green);
 }
 
 .danger {
-    background-color: var(--danger);
+    background-color: color-mix(in srgb, var(--bug-red) 20%, var(--bg-darker));
+    border-color: var(--bug-red);
+    color: var(--bug-red);
 }

@@ -27,3 +27,9 @@
 .bug-list .actions button:last-child {
     margin-inline-start: auto;
 }
+
+@media (max-width: 768px) {
+    .bug-list {
+        grid-template-columns: 1fr;
+    }
+}

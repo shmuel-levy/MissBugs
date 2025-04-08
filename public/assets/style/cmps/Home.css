@@ -1,8 +1,14 @@
 .home-page {
     text-align: center;
+    color: var(--text-light);
+    padding: 2em;
 }
 
 .home-page h2 {
     margin-block-start: 3.5em;
     font-size: 3em;
+    color: var(--primary-green);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
 }

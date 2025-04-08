@@ -1,7 +1,9 @@
 body {
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    line-height: 1.6;
 }
-
 button {
     margin: 2px;
     border: 0;

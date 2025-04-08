@@ -2,6 +2,7 @@
 @import './setup/vars.css';
 @import './setup/base.css';
 @import './setup/layout.css';
+@import './setup/root.css';
 
 @import './cmps/Home.css';
 @import './cmps/AboutUs.css';
@@ -11,7 +12,10 @@
 @import './cmps/AppHeader.css';
 @import './cmps/AppFooter.css';
 @import './cmps/UserMsg.css';
+@import './cmps/UserProfile.css';
+@import './cmps/AdminDashboard.css';
 
 @import './cmps/BugList.css';
 @import './cmps/BugFilter.css';
 @import './cmps/BugPreview.css';
+@import './cmps/LoginSignup.css';

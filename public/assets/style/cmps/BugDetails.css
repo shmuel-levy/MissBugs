@@ -1,12 +1,20 @@
+.bug-details {
+    background-color: var(--bg-darker);
+    padding: 1.5em;
+    border-radius: 10px;
+}
+
 .bug-details h5 {
     margin: 1em 0;
     font-size: 1.1em;
+    color: var(--primary-green);
 }
 
-.bug-details h5 span{
-    color: red;
+.bug-details h5 span {
+    color: var(--bug-red);
 }
 
 .bug-details hr {
     margin: 1em 0;
+    border-color: var(--primary-green);
 }

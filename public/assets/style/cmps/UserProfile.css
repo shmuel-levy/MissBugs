@@ -1,0 +1,65 @@
+.user-profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: var(--gray1);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile h2 {
+    color: var(--color3);
+    border-bottom: 2px solid var(--color3);
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1.5em;
+}
+
+.user-info h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: whitesmoke;
+}
+
+.admin-badge {
+    background-color: var(--color3);
+    color: white;
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.user-bugs {
+    background-color: color-mix(in srgb, var(--gray1) 90%, white);
+    padding: 1.5em;
+    border-radius: 8px;
+}
+
+.user-bugs h3 {
+    color: var(--color3);
+    margin-bottom: 1em;
+}
+
+.user-bugs p {
+    color: var(--gray3);
+    text-align: center;
+    font-style: italic;
+}
+
+/* Loading and Error States */
+.user-profile > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: var(--gray3);
+    font-size: 1.2em;
+    text-align: center;
+}

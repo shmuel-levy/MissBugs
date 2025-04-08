@@ -1,35 +1,63 @@
 .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding-block: 1em;
     background-color: var(--gray1);
     color: whitesmoke;
 }
 
-.app-header > * {
+.app-header .logo {
+    cursor: pointer;
+    height: 50px; /* Adjust as needed */
+    object-fit: contain;
+}
+
+.nav-bar-container {
+    display: flex;
     align-items: center;
-    grid-row: 1;
+    gap: 1.5em;
 }
 
-.app-header h1 {
-    margin: 0;
-    justify-self: start;
-}
-
-.app-header nav {
+.nav-bar {
     display: flex;
     gap: 1em;
-    justify-self: end;
+    margin-right: 1em;
 }
 
-.app-header nav a {
-    border-block-end: 1px solid transparent;
+.nav-bar a {
+    color: whitesmoke;
     text-decoration: none;
+    border-block-end: 1px solid transparent;
+    transition: all 0.3s ease;
 }
 
-.app-header nav a:hover {
+.nav-bar a:hover {
     text-decoration: overline;
 }
 
-.app-header nav a.active {
+.nav-bar a.active {
     color: var(--color3);
     border-block-end: 1px solid var(--color3);
+}
+
+.nav-bar-container > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5em;
+}
+
+.nav-bar-container p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.nav-bar-container .btn {
+    padding: 0.5em 1em;
+    background-color: var(--color3);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }

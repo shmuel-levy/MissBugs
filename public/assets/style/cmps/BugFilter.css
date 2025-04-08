@@ -1,13 +1,40 @@
 .bug-filter {
-    background-color: var(--gray2);
-    padding: 1em;
+    background-color: var(--bg-darker);
+    padding: 1.5em;
+    border-radius: 10px;
+    border: 1px solid var(--primary-green);
+    margin-bottom: 1.5em;
 }
 
 .bug-filter h2 {
     margin-bottom: .5em;
+    color: var(--primary-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .bug-filter label {
     margin-inline-start: 1em;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
 }
 
+.bug-filter input[type="text"],
+.bug-filter select,
+.bug-filter input[type="checkbox"] {
+    background-color: var(--bg-dark);
+    color: var(--primary-green);
+    border: 1px solid var(--primary-green);
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.bug-filter input[type="text"]:focus,
+.bug-filter select:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}

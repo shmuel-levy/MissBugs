@@ -38,9 +38,12 @@ export function LoginSignup({ setUser }) {
         <section className="login">
             <LoginForm onLogin={onLogin} isSignup={isSignup} />
             <div className="btns">
-                <a href="#" onClick={() => setIsSignUp(prev => !prev)}>
-                    {isSignup ? 'Already a member? Login' : 'New user? Signup here'}
-                </a>
+                <a href="#" onClick={(ev) => {
+    ev.preventDefault();
+    setIsSignUp(prev => !prev);
+}}>
+    {isSignup ? 'Already a member? Login' : 'New user? Signup here'}
+</a>
             </div>
         </section>
     )

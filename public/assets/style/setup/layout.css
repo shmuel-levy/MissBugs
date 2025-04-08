@@ -1,12 +1,14 @@
 .main-content, .main-content > .full-width {
     --min-padding: 2rem;
-    --max-width: 900px;
-
+    --max-width: 1200px;
+    
     display: grid;
-    grid-template-columns: 
-        minmax(var(--min-padding), 1fr) 
+    grid-template-columns:
+        minmax(var(--min-padding), 1fr)
         minmax(auto, var(--max-width))
         minmax(var(--min-padding), 1fr);
+    
+    gap: 1em;
 }
 
 .main-content > * {
@@ -21,12 +23,15 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--bg-dark);
 }
 
 .app-wrapper main {
     flex-grow: 1;
+    background-color: var(--bg-dark);
 }
 
 .container {
     padding: 1em;
+    background-color: var(--bg-dark);
 }
